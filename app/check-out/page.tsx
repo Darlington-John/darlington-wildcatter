@@ -124,49 +124,56 @@ const Checkout = () => {
   };
 
   return (
-    <main className="flex  min-h-screen w-full  overflow-auto">
-      <section className="min-h-screen   w-[50%] bg-mustard  py-20 flex flex-col  text-black">
+    <main className="flex  min-h-screen w-full  overflow-auto  max-md:flex-col ">
+      <section className="min-h-screen   w-[50%] bg-mustard  py-20 flex flex-col  text-black max-md:w-full max-md:pt-16  max-md:pb-5  max-md:min-h-auto">
         <div className="flex  flex-col ">
-          <h1 className="gt-black  uppercase text-xl  p-5 border-b border-b-2  border-b-black">
+          <h1 className="gt-black  uppercase text-xl  p-5 border-b border-b-2  border-b-black max-md:text-lg">
             DELIVERY DETAILS
           </h1>
           <Form {...formProps} />
         </div>
       </section>
-      <section className="min-h-screen   w-[50%] bg-black  text-mustard py-20  ">
+      <section className="min-h-screen   w-[50%] bg-black  text-mustard py-20   max-md:w-full max-md:py-10 max-md:min-h-auto">
         <div className="flex  flex-col  justify-between  gap-8  min-h-full">
           <div className="flex flex-col gap-4  h-full overflow-auto  cart-list min-h-[300px]">
-            <h1 className="gt-black  uppercase text-xl  p-5 border-b border-b-2  border-b-mustard">
+            <h1 className="gt-black  uppercase text-xl  p-5 border-b border-b-2  border-b-mustard max-md:text-lg">
               Summary
             </h1>
             <div className="  gap-2 flex flex-col divide-y divide-y-2  p-5 ">
               {cart.map((data, index) => (
                 <div key={index} className="w-full flex  justify-between py-2">
                   <div className="flex gap-2">
-                    <div className="w-full  bg-mustard max-w-[120px]  ">
+                    <div className="w-full  bg-mustard max-w-[120px]  max-md:max-w-[80px]">
                       {/*    eslint-disable-next-line @next/next/no-img-element  */}
                       <img src={data.image} alt="" className="w-full " />
                     </div>
                     <div className="flex flex-col  justify-between ">
                       <div className="flex gap-1 flex-col">
-                        <h1 className="gt-black  uppercase text-xl line-clamp-1 ">
+                        <h1 className="gt-black  uppercase text-xl line-clamp-1  max-md:text-sm max-2xs:text-xs ">
                           {data.name}
                         </h1>
                         {data?.sizes && (
-                          <h1 className="gt-black  uppercase text-xl ">
+                          <h1 className="gt-black  uppercase text-xl  max-md:text-sm max-2xs:text-xs ">
                             size: {data.size}
                           </h1>
                         )}
                       </div>
-
                       <h1 className="gt-black  uppercase text-xl  leading-none">
                         Qty: {data.quantity}
                       </h1>
                     </div>
                   </div>
-                  <h1 className="gt-black  uppercase text-xl ">
-                    ₦{(data.price * data.quantity).toLocaleString("en-US")}.00
-                  </h1>
+                  <div className="flex flex-col gap-4 justify-between">
+                    <h1 className="gt-black  uppercase text-xl  max-md:text-sm max-2xs:text-xs ">
+                      ₦{(data.price * data.quantity).toLocaleString("en-US")}.00
+                    </h1>
+                    {/* <button
+                      className="gt-black  uppercase text-xl  max-md:text-sm max-2xs:text-xs "
+                      onClick={() => removeItem(data.id, data.size)}
+                    >
+                      delete
+                    </button> */}
+                  </div>
                 </div>
               ))}
             </div>

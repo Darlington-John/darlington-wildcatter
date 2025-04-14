@@ -37,7 +37,7 @@ const Form = ({
   successfulPayment,
 }: formType) => {
   return (
-    <div className="w-full flex flex-col gap-8 p-5">
+    <div className="w-full flex flex-col gap-8 p-5 max-md:gap-6">
       <ClassicInput
         value={email}
         success={successfulPayment}
@@ -88,7 +88,7 @@ const Form = ({
 
       <div className="flex flex-col gap-0 w-full ">
         <select
-          className={`border-b-2  focus:border-b-3     h-[40px]   gt-black   text-xl  outline-none   ${
+          className={`border-b-2  focus:border-b-3     h-[40px]   gt-black   text-xl  outline-none  max-md:text-lg  ${
             error === "All fields are required" && selectedState === ""
               ? "border-red"
               : "border-black "
@@ -113,7 +113,7 @@ const Form = ({
 
       <div className="flex flex-col gap-0 w-full ">
         <select
-          className={`border-b-2  focus:border-b-3     h-[40px] text-black  gt-black   text-xl  outline-none ${
+          className={`border-b-2  focus:border-b-3     h-[40px] text-black  gt-black   text-xl  outline-none max-md:text-lg ${
             error === "All fields are required" && !city
               ? "border-red"
               : "border-black"

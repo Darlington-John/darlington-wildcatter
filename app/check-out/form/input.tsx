@@ -35,7 +35,7 @@ const ClassicInput = ({
       )}
 
       <input
-        className={`h-[40px] py-1 px-3   text-black  gt-black   text-xl line-clamp-1  border-b-2    focus:border-b-3     w-full  duration-150 outline-none   ${
+        className={`h-[40px] py-1 px-3   text-black  gt-black   text-xl line-clamp-1  border-b-2    focus:border-b-3     w-full  duration-150 outline-none max-md:text-lg   ${
           error === errorContent && !value
             ? "border-red  text-red"
             : "border-grey"
