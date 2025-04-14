@@ -44,6 +44,8 @@ interface MainContextType {
   bagRef: React.RefObject<HTMLDivElement | null>;
   isBagVisible: boolean;
   toggleBag: () => void;
+  canStart: boolean;
+  setCanStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const MainContext = createContext<MainContextType | null>(null);
@@ -223,16 +225,20 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({
       clearTimeout(hideTimer);
     };
   }, [linkname]);
+  const [canStart, setCanStart] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!canStart) {
+      return;
+    }
     const timer = setTimeout(() => {
       setLoading(false);
     }, 10000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [canStart]);
 
   const {
     isVisible: isBagVisible,
@@ -273,6 +279,8 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({
       bagRef,
       isBagVisible,
       toggleBag,
+      canStart,
+      setCanStart,
     }),
     [
       position,
@@ -303,6 +311,8 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({
       bagRef,
       isBagVisible,
       toggleBag,
+      canStart,
+      setCanStart,
     ]
   );
 

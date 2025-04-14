@@ -7,59 +7,61 @@ import hand from "~/public/images/hand.svg";
 import box from "~/public/images/timer-square.svg";
 import explode from "~/public/images/explode.svg";
 import { usePathname } from "next/navigation";
+import { useMainContext } from "../context/context";
 const IntroLoader = () => {
+  const { canStart, setCanStart } = useMainContext();
   const [waiting, setWaiting] = useState(true);
   const [hasShown, setHasShown] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setWaiting(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const [boxWaiting, setBoxWaiting] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setBoxWaiting(false);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const [time, setTime] = useState(3); // Start from 3
+  const [time, setTime] = useState(3);
   const [started, setStarted] = useState(false);
   const [countdownActive, setCountdownActive] = useState(false);
 
+  const linkname = usePathname();
+
   useEffect(() => {
-    const delayTimer = setTimeout(() => setCountdownActive(true), 4000);
+    if (!canStart) return;
 
-    return () => clearTimeout(delayTimer);
-  }, []);
+    const waitingTimer = setTimeout(() => {
+      setWaiting(false);
+    }, 2000);
 
-  // Countdown logic
+    const boxTimer = setTimeout(() => {
+      setBoxWaiting(false);
+    }, 4000);
+
+    const countdownTimer = setTimeout(() => {
+      setCountdownActive(true);
+    }, 4000);
+
+    return () => {
+      clearTimeout(waitingTimer);
+      clearTimeout(boxTimer);
+      clearTimeout(countdownTimer);
+    };
+  }, [canStart]);
+
   useEffect(() => {
     if (!countdownActive || time === 0) return;
 
-    const timer = setInterval(() => {
+    const countdownInterval = setInterval(() => {
       setTime((prev) => prev - 1);
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => clearInterval(countdownInterval);
   }, [countdownActive, time]);
 
-  // Set started to true 1 second after countdown finishes
   useEffect(() => {
     if (time === 0) {
       const startDelay = setTimeout(() => setStarted(true), 1000);
       const shownDelay = setTimeout(() => setHasShown(true), 2000);
+
       return () => {
         clearTimeout(startDelay);
         clearTimeout(shownDelay);
       };
     }
   }, [time]);
-
-  const linkname = usePathname();
 
   return (
     linkname === "/" &&
@@ -69,8 +71,20 @@ const IntroLoader = () => {
           boxWaiting ? "bg-mustard" : "bg-red"
         } ${started && "fade"} `}
       >
-        <video autoPlay muted playsInline className=" w-full " preload="auto">
-          <source src={"/videos/intro.webm"} type="video/webm" />
+        <div className="text-white bg-[#ff00ff] fixed top-0 left-0 z-[100000]">
+          {waiting.toString()},{canStart.toString()}
+        </div>
+        <video
+          autoPlay
+          muted
+          playsInline
+          className=" w-full "
+          preload="auto"
+          onCanPlayThrough={() => {
+            setCanStart(true);
+          }}
+        >
+          {/* <source src={"/videos/intro.webm"} type="video/webm" /> */}
           <source src={"/videos/intro.mp4"} type="video/mp4" />
         </video>
         {!waiting && (
