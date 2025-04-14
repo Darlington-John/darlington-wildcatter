@@ -71,9 +71,6 @@ const IntroLoader = () => {
           boxWaiting ? "bg-mustard" : "bg-red"
         } ${started && "fade"} `}
       >
-        <div className="text-white bg-[#ff00ff] fixed top-0 left-0 z-[100000]">
-          {waiting.toString()},{canStart.toString()}
-        </div>
         <video
           autoPlay
           muted
@@ -84,8 +81,8 @@ const IntroLoader = () => {
             setCanStart(true);
           }}
         >
-          {/* <source src={"/videos/intro.webm"} type="video/webm" /> */}
-          <source src={"/videos/intro.mp4"} type="video/mp4" />
+          <source src={"/videos/intro.webm"} type="video/webm" />
+          {/* <source src={"/videos/intro.mp4"} type="video/mp4" /> */}
         </video>
         {!waiting && (
           <motion.div
