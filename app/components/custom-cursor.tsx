@@ -35,7 +35,7 @@ const CustomCursor = () => {
       <Image
         src={cursorImg}
         style={containerStyle}
-        className={`w-32 z-[90] fixed pointer-events-none transition-transform duration-150 ease-out ${
+        className={`w-32 z-[600] fixed pointer-events-none transition-transform duration-150 ease-out ${
           isHovered ? "scale-75" : "scale-100"
         }  ${isHolding && "holding"}`}
         alt="cursor"
