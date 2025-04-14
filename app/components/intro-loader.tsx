@@ -76,6 +76,7 @@ const IntroLoader = () => {
           muted
           playsInline
           className=" w-full "
+          poster="/images/logo.svg"
           preload="auto"
           onCanPlayThrough={() => {
             setCanStart(true);
@@ -84,67 +85,68 @@ const IntroLoader = () => {
           <source src={"/videos/intro.webm"} type="video/webm" />
           {/* <source src={"/videos/intro.mp4"} type="video/mp4" /> */}
         </video>
-        {!waiting && (
-          <motion.div
-            className=" mx-auto  p-4 absolute  top-[60%]  "
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 0.4,
-              scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
-            }}
+
+        <motion.div
+          className={` mx-auto  p-4 absolute  top-[60%]  ${
+            waiting && "invisible"
+          }`}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.4,
+            scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+          }}
+        >
+          <div
+            className={`flex items-center  justify-center    ${
+              countdownActive && "shake"
+            }`}
           >
+            <Image
+              src={hand}
+              alt="left-hand"
+              className=" w-28  max-xl:w-20 max-sm:w-16 max-3xs:w-12"
+            />
             <div
-              className={`flex items-center  justify-center    ${
-                countdownActive && "shake"
+              className={` gt-black text-[80px]  text-black  leading-none border-y border-y-2  tracking-tighter  shlrink  overflow-hidden text-nowrap  py-6 max-xl:text-5xl max-sm:text-2xl  max-3xs:text-lg max-3xs:py-4.5   ${
+                !boxWaiting && "hidden"
               }`}
             >
-              <Image
-                src={hand}
-                alt="left-hand"
-                className=" w-28  max-xl:w-20 max-sm:w-16 max-3xs:w-12"
-              />
-              <div
-                className={` gt-black text-[80px]  text-black  leading-none border-y border-y-2  tracking-tighter  shlrink  overflow-hidden text-nowrap  py-6 max-xl:text-5xl max-sm:text-2xl  max-3xs:text-lg max-3xs:py-4.5   ${
-                  !boxWaiting && "hidden"
-                }`}
-              >
-                LETS BLOW SHIT UP
-              </div>
-              {!boxWaiting && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    duration: 0.4,
-                    scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
-                  }}
-                  className="relative  w-72 max-xl:w-52  max-sm:w-40"
-                >
-                  <Image
-                    src={box}
-                    alt="box  "
-                    className="  w-full  relative  z-20 bg-red"
-                  />
-                  <Image
-                    src={explode}
-                    alt="explode"
-                    className="w-20 absolute  top-1/2  left-1/2  transform -translate-y-1/2  -translate-x-1/2  z-10    explode"
-                  />
-                  <p className="  absolute top-1/2  left-1/2  transform -translate-y-1/2  -translate-x-1/2 z-30  text-5xl gt-black  text-nowrap  tracking-tighter text-black max-xl:text-3xl max-sm:text-xl max-2xs:text-lg">
-                    00 : {time.toString().padStart(2, "0")}
-                  </p>
-                </motion.div>
-              )}
-
-              <Image
-                src={hand}
-                alt="left-hand"
-                className=" w-28 scale-x-[-1]  max-xl:w-20  max-sm:w-16 max-3xs:w-12"
-              />
+              LETS BLOW SHIT UP
             </div>
-          </motion.div>
-        )}
+            {!boxWaiting && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.4,
+                  scale: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
+                }}
+                className="relative  w-72 max-xl:w-52  max-sm:w-40"
+              >
+                <Image
+                  src={box}
+                  alt="box  "
+                  className="  w-full  relative  z-20 bg-red"
+                />
+                <Image
+                  src={explode}
+                  alt="explode"
+                  className="w-20 absolute  top-1/2  left-1/2  transform -translate-y-1/2  -translate-x-1/2  z-10    explode"
+                />
+                <p className="  absolute top-1/2  left-1/2  transform -translate-y-1/2  -translate-x-1/2 z-30  text-5xl gt-black  text-nowrap  tracking-tighter text-black max-xl:text-3xl max-sm:text-xl max-2xs:text-lg">
+                  00 : {time.toString().padStart(2, "0")}
+                </p>
+              </motion.div>
+            )}
+
+            <Image
+              src={hand}
+              alt="left-hand"
+              className=" w-28 scale-x-[-1]  max-xl:w-20  max-sm:w-16 max-3xs:w-12"
+            />
+          </div>
+        </motion.div>
       </div>
     )
   );
