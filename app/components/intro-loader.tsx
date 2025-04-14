@@ -109,7 +109,7 @@ const IntroLoader = () => {
             />
             <div
               className={` gt-black text-[80px]  text-black  leading-none border-y border-y-2  tracking-tighter  shlrink  overflow-hidden text-nowrap  py-6 max-xl:text-5xl max-sm:text-2xl  max-3xs:text-lg max-3xs:py-4.5   ${
-                !boxWaiting && "shrink"
+                !boxWaiting && "hidden"
               }`}
             >
               LETS BLOW SHIT UP
