@@ -180,11 +180,26 @@ to {
     opacity: 1;
   }
   80% {
-    transform: scale(20);
+    transform: scale(30);
     opacity: 1;
   }
   100% {
-    transform: scale(20);
+    transform: scale(30);
+    opacity: 0;
+  }
+}
+
+@keyframes corner-explode-sm {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(15);
     opacity: 0;
   }
 }
@@ -192,6 +207,13 @@ to {
 .corner-explode{
   animation: corner-explode 1s forwards; 
  
+}
+
+@media screen and (max-width: 500px) {
+  .corner-explode{
+    animation: corner-explode-sm  1s forwards; 
+   
+  }
 }
 
 @keyframes link-shake{
