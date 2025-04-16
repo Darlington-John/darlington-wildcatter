@@ -53,17 +53,17 @@ export const MainContext = createContext<MainContextType | null>(null);
 export const Provider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     window.location.reload();
-  //   };
+  useEffect(() => {
+    const handleResize = () => {
+      window.location.reload();
+    };
 
-  //   window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
 
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const initCart = () => {
     if (typeof window !== "undefined") {
       const existingCart = localStorage.getItem("cart");
