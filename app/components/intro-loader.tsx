@@ -63,6 +63,14 @@ const IntroLoader = () => {
     }
   }, [time]);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCanStart(true); // fallback if onCanPlayThrough doesn't fire
+    }, 10000);
+
+    return () => clearTimeout(timeout);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     linkname === "/" &&
     !hasShown && (

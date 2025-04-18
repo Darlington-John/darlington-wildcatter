@@ -8,6 +8,7 @@ import { useMainContext } from "../context/context";
 import { Sling as Hamburger } from "hamburger-react";
 import logoYellow from "~/public/images/logo-yellow.svg";
 import bagYellow from "~/public/icons/bag-yellow.svg";
+import { usePathname } from "next/navigation";
 const Header = () => {
   const {
     toggleOverlay,
@@ -18,6 +19,8 @@ const Header = () => {
     fillColor,
     toggleBag,
   } = useMainContext();
+
+  const linkname = usePathname();
   return (
     <header className="flex items-center justify-between w-full fixed px-4  top-6 z-[80] max-lg:top-4">
       <Image
@@ -32,7 +35,11 @@ const Header = () => {
         className="w-[200px] max-lg:w-[160px]"
         onMouseEnter={onHover}
         onMouseLeave={onHoverEnd}
-        onClick={() => loadPage("red", `/`)}
+        onClick={() => {
+          if (linkname !== "/") {
+            loadPage("red", "/");
+          }
+        }}
       />
       <div className="flex gap-3 max-lg:gap-2  max-xs:gap-1">
         <div
